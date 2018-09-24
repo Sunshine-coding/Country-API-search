@@ -1,27 +1,63 @@
-console.log("hello");
-
 const url = 'https://restcountries.eu/rest/v2/all';
 
 let search_Result = document.querySelector('.search_Result');
-console.log(search_Result);
+let search_byName = document.querySelector('.search_byName');
+let search_byCapital = document.querySelector('.search_byCapital');
+let search_byRegion = document.querySelector('.search_byRegion');
+let search_byLang = document.querySelector('.search_byLang');
+let search_byCurrencies = document.querySelector('.search_byCurrencies');
+let search_byPopulation = document.querySelector('.search_byPopulation');
+let search_byTimezone = document.querySelector('.search_byTimezone');
+let search_byFlag = document.querySelector('.search_byFlag');
+  
 
-const displayContents = countries => {
-    let div;
+const displayContents = (countries, lookfor, resultDiv, ObjPro) => {
+    
     countries.forEach(country => {
+        let div;
         div = document.createElement('div');
-        div.textContent = country.name;
-        search_Result.appendChild(div);
+       
+        (typeof country[lookfor] == "object") ? 
+        ((ObjPro == 0) ? (div.textContent = country[lookfor][0]) : (div.textContent = country[lookfor][0][ObjPro])) 
+        : (div.textContent = country[lookfor]); 
+        resultDiv.appendChild(div);
+        search_Result.appendChild(resultDiv);    
     })
 }
 
-const fetchData = (url, displayContentsFn) =>{
+const displayImages = (countries, lookfor, resultDiv) => {
+
+    countries.forEach(country => {
+        let img = document.createElement('img');
+        img.setAttribute('src', country[lookfor]);
+        img.setAttribute('width', '100px');
+        img.setAttribute('height','100px');
+        console.log(img.src);
+        resultDiv.appendChild(img);
+        search_Result.appendChild(resultDiv);    
+    })
+}
+
+const fetchData = (url, displayContentsFn, displayImagesFn) =>{
     
     fetch(url)
     .then(response => response.json())
     .then(countries => {
 
-        displayContentsFn(countries);
-
+        
+        displayContentsFn(countries, "name", search_byName);
+        displayContentsFn(countries, "region", search_byRegion);
+        displayContentsFn(countries, "capital", search_byCapital);
+        displayContentsFn(countries, "languages", search_byLang, "name");
+        displayContentsFn(countries, "currencies", search_byCurrencies, "symbol");
+        displayContentsFn(countries, "population", search_byPopulation);
+        // the last parameter 0 means no object property. Only array exist.
+        displayContentsFn(countries, "timezones", search_byTimezone, 0);
+        displayImagesFn(countries, "flag", search_byFlag);
+        //displayContentsFn(countries, "capital", search_byCapital);
+        //displayContentsFn(countries, "capital", search_byCapital);
+        //displayContentsFn(countries, "capital", search_byCapital);
+       
 
         /*let div;
         countries.forEach(country => {
@@ -32,5 +68,5 @@ const fetchData = (url, displayContentsFn) =>{
     })
 }
 
-fetchData(url, displayContents);
+fetchData(url, displayContents, displayImages);
 

@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    padding: 0;
+}
+
+.search_Result{
+    display: flex;
+}
+
+.search_byFlag{
+    display: flex;
+    flex-direction : column;
+    width: 100%;
+}
