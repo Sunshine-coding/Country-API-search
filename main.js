@@ -1,5 +1,11 @@
 const url = 'https://restcountries.eu/rest/v2/all';
 
+/*name,capital,population,region, subregion,languages,currencies, flag*/
+
+
+let search_Results = document.querySelector('.search_Results');
+
+/*
 let search_Result = document.querySelector('.search_Result');
 let search_byName = document.querySelector('.search_byName');
 let search_byCapital = document.querySelector('.search_byCapital');
@@ -9,8 +15,39 @@ let search_byCurrencies = document.querySelector('.search_byCurrencies');
 let search_byPopulation = document.querySelector('.search_byPopulation');
 let search_byTimezone = document.querySelector('.search_byTimezone');
 let search_byFlag = document.querySelector('.search_byFlag');
-  
+*/
 
+function CountryObj(country){
+    this.name = country.name;
+    this.region = country.region;
+    this.subregion = country.subregion;
+    this.capital = country.capital;
+    this.langauges = country["languages"][0]["name"];
+    this.currencies = country.currencies;
+    this.flag = country.flag;
+}
+
+const extractCountryData = countries => {
+    let extractedCountryData = [];
+
+    countries.forEach((country, index) => {
+       extractedCountryData[index] = new CountryObj(country);
+    })
+    displayCountries(extractedCountryData);
+    console.log(extractedCountryData);
+
+} 
+
+const displayCountries = countryData => {
+
+    countryData.forEach( country => {
+        let div = document.createElement('div');
+        div.textContent = `${country.name}`
+        search_Results.appendChild(div);  
+    })
+}
+
+/*
 const displayContents = (countries, lookfor, resultDiv, ObjPro) => {
     
     countries.forEach(country => {
@@ -37,14 +74,17 @@ const displayImages = (countries, lookfor, resultDiv) => {
         search_Result.appendChild(resultDiv);    
     })
 }
+*/
 
-const fetchData = (url, displayContentsFn, displayImagesFn) =>{
-    
+//const fetchData = (url, displayContentsFn, displayImagesFn) =>{
+const fetchData = (url) =>{
+
     fetch(url)
     .then(response => response.json())
     .then(countries => {
 
-        
+        extractCountryData(countries);
+        /*
         displayContentsFn(countries, "name", search_byName);
         displayContentsFn(countries, "region", search_byRegion);
         displayContentsFn(countries, "capital", search_byCapital);
@@ -57,7 +97,7 @@ const fetchData = (url, displayContentsFn, displayImagesFn) =>{
         //displayContentsFn(countries, "capital", search_byCapital);
         //displayContentsFn(countries, "capital", search_byCapital);
         //displayContentsFn(countries, "capital", search_byCapital);
-       
+       */
 
         /*let div;
         countries.forEach(country => {
@@ -68,5 +108,7 @@ const fetchData = (url, displayContentsFn, displayImagesFn) =>{
     })
 }
 
-fetchData(url, displayContents, displayImages);
+//fetchData(url, displayContents, displayImages);
+
+fetchData(url);
 
