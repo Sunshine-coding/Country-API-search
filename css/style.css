@@ -13,3 +13,31 @@
     flex-direction : column;
     width: 100%;
 }
+
+.flagImg{
+    width : 150px;
+    height: 100px;
+}
+
+.key_span{
+    width : 50px;
+}
+
+.countryDiv{
+    display : flex;
+    flex-wrap: wrap;
+    background : yellowgreen;
+    margin : 2rem;
+}
+
+.country_ul{
+    list-style: none;
+}
+
+.country_ul li p{
+    display: inline-block;
+}
+
+.name_value{
+    font-size : 20px;
+}
