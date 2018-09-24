@@ -23,7 +23,8 @@ function CountryObj(country){
     this.subregion = country.subregion;
     this.capital = country.capital;
     this.langauges = country["languages"][0]["name"];
-    this.currencies = country.currencies;
+    this.population = country.population;
+    this.currencies = country.currencies[0]["symbol"];
     this.flag = country.flag;
 }
 
@@ -40,10 +41,39 @@ const extractCountryData = countries => {
 
 const displayCountries = countryData => {
 
-    countryData.forEach( country => {
-        let div = document.createElement('div');
-        div.textContent = `${country.name}`
-        search_Results.appendChild(div);  
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let headTr = document.createElement('tr');
+    let tableBody = document.createElement('tbody');
+
+    Object.keys(countryData[0]).forEach(countryKey => {
+        let headTh = document.createElement('th');
+
+         headTh.textContent = countryKey;
+
+         headTr.appendChild(headTh);
+         thead.appendChild(headTr);
+         table.appendChild(thead);
+    })
+
+    
+      countryData.forEach(country => {
+        let tableRow = document.createElement('tr');
+        
+        
+        for(let key in country){
+            let img = document.createElement('img');
+            let td = document.createElement('td');
+            (key === "flag") ?
+            (img.src = `${country[key]}`,
+            td.appendChild(img)):
+            (td.textContent =`${country[key]}`)
+            
+            tableRow.appendChild(td);
+        }
+        tableBody.appendChild(tableRow);
+        table.appendChild(tableBody);
+        search_Results.appendChild(table);  
     })
 }
 
@@ -83,6 +113,17 @@ const fetchData = (url) =>{
     .then(response => response.json())
     .then(countries => {
 
+        /*
+        countries.forEach(element => {
+            document.querySelector('body').insertAdjacentHTML(
+                'afterbegin', 
+                `
+                    <td>${element.name}</td>
+                    <td>${element.region}</td>
+                    <td></td>
+                `
+            );
+        })*/
         extractCountryData(countries);
         /*
         displayContentsFn(countries, "name", search_byName);
