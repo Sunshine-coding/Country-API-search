@@ -17,7 +17,7 @@ let search_byTimezone = document.querySelector('.search_byTimezone');
 let search_byFlag = document.querySelector('.search_byFlag');
 */
 
-function CountryObj(country){
+function CountryObj(country) {
     this.name = country.name;
     this.region = country.region;
     this.subregion = country.subregion;
@@ -29,51 +29,50 @@ function CountryObj(country){
 }
 
 const extractCountryData = countries => {
-    let extractedCountryData = [];
-
-    countries.forEach((country, index) => {
-       extractedCountryData[index] = new CountryObj(country);
-    })
-    displayCountries(extractedCountryData);
-    console.log(extractedCountryData);
-
-} 
+    return countries.reduce((acc, country, index) => {
+       acc[index] = new CountryObj(country);
+       return acc;
+    }, []);
+}
 
 const displayCountries = countryData => {
 
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let headTr = document.createElement('tr');
-    let tableBody = document.createElement('tbody');
-
-    Object.keys(countryData[0]).forEach(countryKey => {
-        let headTh = document.createElement('th');
-
-         headTh.textContent = countryKey;
-
-         headTr.appendChild(headTh);
-         thead.appendChild(headTr);
-         table.appendChild(thead);
-    })
-
-    
-      countryData.forEach(country => {
-        let tableRow = document.createElement('tr');
-        
-        
+      countryData.forEach( country => {
+        let country_div = document.createElement('div');
+        country_div.setAttribute('class','countryDiv');
+        let img_top_div = document.createElement('div');
+        let country_ul = document.createElement('ul');
+        country_ul.setAttribute('class','country_ul');
+ 
         for(let key in country){
-            let img = document.createElement('img');
-            let td = document.createElement('td');
-            (key === "flag") ?
-            (img.src = `${country[key]}`,
-            td.appendChild(img)):
-            (td.textContent =`${country[key]}`)
             
-            tableRow.appendChild(td);
+            let country_li = document.createElement('li');
+            let value_p = document.createElement('p');
+
+            
+            if(key !== "name"){
+                let key_span = document.createElement('span');
+                key_span.setAttribute('class','key_span');
+                key_span.textContent = key;
+                country_li.appendChild(key_span);
+            } else {
+                value_p.classList.add("name_value");
+            }
+
+            if(key === "flag") {
+                let img = document.createElement('img');
+                img.src = country[key];
+                img.setAttribute('class','flagImg');
+                img_top_div.appendChild(img);
+                country_div.appendChild(img_top_div);
+            } else {
+                value_p.textContent =country[key];
+                country_li.appendChild(value_p);
+                country_ul.appendChild(country_li);
+            }    
         }
-        tableBody.appendChild(tableRow);
-        table.appendChild(tableBody);
-        search_Results.appendChild(table);  
+        country_div.appendChild(country_ul);
+        search_Results.appendChild(country_div);  
     })
 }
 
@@ -124,7 +123,7 @@ const fetchData = (url) =>{
                 `
             );
         })*/
-        extractCountryData(countries);
+        displayCountries(extractCountryData(countries));
         /*
         displayContentsFn(countries, "name", search_byName);
         displayContentsFn(countries, "region", search_byRegion);
