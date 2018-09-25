@@ -64,16 +64,22 @@ const sortWithDescending = countries => {
     return sortedCountries; 
 }
 
+const sortCountries = (countries) => {
+  let sortedCountries;
+  if (document.querySelector('#ascending_sort').checked) {
+    sortedCountries = sortWithAscending(countries);
+  } else if (document.querySelector('#descending_sort').checked) {
+    sortedCountries = sortWithDescending(countries);
+  }
+  return sortedCountries;
+};
+
 // Display the country data
 const displayCountries = () => {
   
   let searchedCountries = searchCountries(countries_data);
 
-  if (document.querySelector('#ascending_sort').checked) {
-    sortedCountries = sortWithAscending(searchedCountries);
-  } else if (document.querySelector('#descending_sort').checked) {
-    sortedCountries = sortWithDescending(searchedCountries);
-  }
+  let sortedCountries = sortCountries(searchedCountries);
 
   let filteredResult = document.querySelector(".filteredResult"); 
   markupForResult = `The total Countries are <span class="countCountries">${sortedCountries.length}</span>`;
