@@ -4,19 +4,75 @@
     padding: 0;
 }
 
+.intro_wrapper{
+    margin : 3rem auto;
+    display : flex;
+    flex-direction : column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.fa-globe-asia{
+    font-size : 70px;
+    color : #ffa500;
+    padding-right : 1rem;
+}
+
+.title{
+    color : #2F4F4F;
+    font-size : 30px;
+    font-weight : 900;
+}
+
+.filteredResult{
+    color : #008b8b;
+    font-size : 20px;
+    margin-top : 3rem;
+}
+
+.countCountries{
+    color : #ffa500;
+    font-weight: 900;
+    font-size : 25px;
+}
+
+.search_input_wrapper{
+    display : flex;
+    justify-content: center;
+    margin-bottom : 2rem;
+    background-color : #778899;
+    padding : 2rem;
+}
+
+.search_input{
+    width : 500px;
+    height : 50px;
+    outline : none;
+    font-size : 16px;
+}
+
+.search_btn{
+    width : 100px;
+    font-size : 16px;
+    font-weight: 700;
+    background-color : #ffd700;
+    outline : none;
+}
+
 .search_Results{
     display : flex;
     flex-wrap : wrap;
+    justify-content: center;
 }
 
 .countryDiv{
     display : flex;
     flex-wrap: wrap;
-    background-image : linear-gradient(to bottom right, #E0FFFF,#AFEEEE);
+    background-image : linear-gradient(to bottom right, #87CEFA,#ADD8E6);
     margin : 1rem;
     padding : 2rem;
     border-radius: 15px 50px;
-    border : 2px #008b8b solid;
+    border : 2px #87CEFA solid;
 }
 
 .country_ul{
@@ -31,7 +87,7 @@
 .key_span{
     width : 50px;
     margin : 1rem;
-    color : #008b8b;
+    color : #191970;
     font-weight : 900;
 }
 
@@ -42,7 +98,7 @@
 .name_value{
     font-size : 25px;
     font-weight: 900;
-    color : #2f4f4f;
+    color : #2F4F4F;
 }
 
 .flagImg{

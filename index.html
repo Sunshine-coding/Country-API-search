@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,21 @@
     <title>Country API</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
+
 <body>
+    <div class="intro_wrapper">
+        <p class="title"> <i class="fas fa-globe-asia"></i> World Country List</p>
+        <p class="filteredResult"></p>
+    </div>
+
+    <div class="search_input_wrapper">
+        <input class="search_input" type="text"><button class="search_btn">Search</button>
+    </div>
     <div class="search_Results"></div>
-    <div class="search_Result"> 
+    <div class="search_Result">
         <div class="search_byName">Name</div>
         <div class="search_byRegion">Region</div>
         <div class="search_byCapital">Capital</div>
@@ -22,4 +34,5 @@
     </div>
     <script src="main.js"></script>
 </body>
+
 </html>
