@@ -65,10 +65,9 @@ const sortWithDescending = countries => {
 }
 
 // Display the country data
-const displayCountries = countryData => {
+const displayCountries = () => {
   
-  // searchedCountries;
-  searchedCountries = searchCountries(countryData);
+  let searchedCountries = searchCountries(countries_data);
 
   if (document.querySelector('#ascending_sort').checked) {
     sortedCountries = sortWithAscending(searchedCountries);
@@ -125,7 +124,6 @@ const searchCountries = countries => {
 
   let search_input = document.querySelector(".search_input").value.toLowerCase();
     console.log("type", (typeof search_input));
-  //let numbers = /[0-9]/g;
   
   //Clean the result before display new result
   search_Results.innerHTML = "";
@@ -142,35 +140,36 @@ const searchCountries = countries => {
 
     // document.querySelector(".search_input").value = "";
     return filteredCountries;
-//   } else {
-//     alert("Please type an first Letter/words to search :)");
-//   }
 };
 
 const search_input = document.querySelector(".search_input");
+
+let countries_data = null;
 
 const fetchData = url => {
   fetch(url)
     .then(response => response.json())
     .then(countries => {
 
+      countries_data = extractCountryData(countries);
       //As default, it displays every countries in data
       //displayCountries(extractCountryData(countries));
-      displayCountries(extractCountryData(countries));
-
-      document.querySelector('#ascending_sort').addEventListener("click", ()=>{
-        displayCountries(extractCountryData(countries));
-      });
-
-      document.querySelector('#descending_sort').addEventListener("click", ()=>{
-        displayCountries(extractCountryData(countries));
-      });
-
-       //When search input is typed, it starts to search
-       search_input.addEventListener("keyup", ()=>{
-        displayCountries(extractCountryData(countries));
-      });
+      displayCountries();
+      
     });
 };
+
+document.querySelector('#ascending_sort').addEventListener("click", ()=>{
+  displayCountries();
+});
+
+document.querySelector('#descending_sort').addEventListener("click", ()=>{
+  displayCountries();
+});
+
+//When search input is typed, it starts to search
+search_input.addEventListener("keyup", ()=>{
+  displayCountries();
+});
 
 fetchData(url);
