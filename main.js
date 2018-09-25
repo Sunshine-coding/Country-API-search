@@ -17,12 +17,61 @@ function CountryObj(country) {
 const extractCountryData = countries => {
   return countries.reduce((acc, country, index) => {
     acc[index] = new CountryObj(country);
-    console.log(acc);
     return acc;
   }, []);
 };
 
+// Sort the country data
+const sortWithAscending = countries => {
+    //To prevent side effects which means change the original country array
+    const newcountries = [...countries];
+    const sortedCountries = newcountries.sort((a, b) => {
+
+        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        let nameB = b.name.toUpperCase();
+        if(nameA < nameB) {
+            return -1
+        }
+        else if (nameA > nameB){
+            return 1;
+            
+        } else if (nameA = nameB){
+            return  0;
+        }  
+    });
+    return sortedCountries; 
+}
+
+const sortWithDescending = countries => {
+    //To prevent side effects which means change the original country array
+    const newcountries = [...countries];
+    const sortedCountries = newcountries.sort((a, b) => {
+
+        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        let nameB = b.name.toUpperCase();
+
+        if(nameA < nameB) {
+            return 1
+        }
+        else if (nameA > nameB){
+            return -1;
+
+        } else if (nameA = nameB){
+            return  0;
+        }  
+        
+    });
+    return sortedCountries; 
+}
+
+// Display the country data
 const displayCountries = countryData => {
+  
+  if (document.querySelector('#ascending_sort').checked) {
+    countryData = sortWithAscending(countryData);
+  } else if (document.querySelector('#descending_sort').checked) {
+    countryData = sortWithDescending(countryData);
+  }
 
   let filteredResult = document.querySelector(".filteredResult"); 
   markupForResult = `The total Countries are <span class="countCountries">${countryData.length}</span>`;
@@ -82,35 +131,42 @@ const searchCountries = countries => {
     let filteredCountries;
 
     filteredCountries = countries.filter(countryObj => {
-<<<<<<< HEAD
-        if(countryObj["name"].toLowerCase().includes(search_input))
-        return countryObj;
-=======
         return Object.values(countryObj)
              .join("")
              .toLowerCase()
              .includes(search_input);
->>>>>>> c154b6c... Search by all values
     });
 
-    document.querySelector(".search_input").value = "";
+    // document.querySelector(".search_input").value = "";
     return filteredCountries;
 //   } else {
 //     alert("Please type an first Letter/words to search :)");
 //   }
 };
 
-const searchBtn = document.querySelector(".search_btn");
+const search_input = document.querySelector(".search_input");
 
 const fetchData = url => {
   fetch(url)
     .then(response => response.json())
     .then(countries => {
-      
+
+      //As default, it displays every countries in data
+      //displayCountries(extractCountryData(countries));
       displayCountries(extractCountryData(countries));
-      searchBtn.addEventListener("click", ()=>{
+
+      document.querySelector('#ascending_sort').addEventListener("click", ()=>{
         displayCountries(searchCountries(extractCountryData(countries)));
-      }); 
+      });
+
+      document.querySelector('#descending_sort').addEventListener("click", ()=>{
+        displayCountries(searchCountries(extractCountryData(countries)));
+      });
+
+       //When search input is typed, it starts to search
+       search_input.addEventListener("keyup", ()=>{
+        displayCountries(searchCountries(extractCountryData(countries)));
+      });
     });
 };
 

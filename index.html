@@ -8,13 +8,24 @@
     <title>Country API</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
 </head>
 
 <body>
     <div class="intro_wrapper">
         <p class="title"> <i class="fas fa-globe-asia"></i> World Country List</p>
+        <div class="sort_wrapper">
+            <p>Sort</p>
+            <div>
+                <input type="radio" id="ascending_sort" name="radio" value="ascending_sort" checked />
+                <label for="ascending_sort">Ascending</label>
+            </div>
+            <div>
+                <input type="radio" id="descending_sort" name="radio" value="descending_sort" />
+                <label for="descending_sort">descending</label>
+            </div>
+        </div>
         <p class="filteredResult"></p>
     </div>
 
