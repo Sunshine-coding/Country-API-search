@@ -67,17 +67,20 @@ const sortWithDescending = countries => {
 // Display the country data
 const displayCountries = countryData => {
   
+  // searchedCountries;
+  searchedCountries = searchCountries(countryData);
+
   if (document.querySelector('#ascending_sort').checked) {
-    countryData = sortWithAscending(countryData);
+    sortedCountries = sortWithAscending(searchedCountries);
   } else if (document.querySelector('#descending_sort').checked) {
-    countryData = sortWithDescending(countryData);
+    sortedCountries = sortWithDescending(searchedCountries);
   }
 
   let filteredResult = document.querySelector(".filteredResult"); 
-  markupForResult = `The total Countries are <span class="countCountries">${countryData.length}</span>`;
+  markupForResult = `The total Countries are <span class="countCountries">${sortedCountries.length}</span>`;
   filteredResult.insertAdjacentHTML("afterbegin", markupForResult);
 
-  countryData.forEach(country => {
+  sortedCountries.forEach(country => {
     let country_div = document.createElement("div");
     country_div.setAttribute("class", "countryDiv");
     let img_top_div = document.createElement("div");
@@ -156,16 +159,16 @@ const fetchData = url => {
       displayCountries(extractCountryData(countries));
 
       document.querySelector('#ascending_sort').addEventListener("click", ()=>{
-        displayCountries(searchCountries(extractCountryData(countries)));
+        displayCountries(extractCountryData(countries));
       });
 
       document.querySelector('#descending_sort').addEventListener("click", ()=>{
-        displayCountries(searchCountries(extractCountryData(countries)));
+        displayCountries(extractCountryData(countries));
       });
 
        //When search input is typed, it starts to search
        search_input.addEventListener("keyup", ()=>{
-        displayCountries(searchCountries(extractCountryData(countries)));
+        displayCountries(extractCountryData(countries));
       });
     });
 };
