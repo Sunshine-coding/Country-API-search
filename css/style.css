@@ -4,34 +4,35 @@
     padding: 0;
 }
 
-.search_Result{
-    display: flex;
-}
-
-.search_byFlag{
-    display: flex;
-    flex-direction : column;
-    width: 100%;
-}
-
-.flagImg{
-    width : 150px;
-    height: 100px;
-}
-
-.key_span{
-    width : 50px;
+.search_Results{
+    display : flex;
+    flex-wrap : wrap;
 }
 
 .countryDiv{
     display : flex;
     flex-wrap: wrap;
-    background : yellowgreen;
-    margin : 2rem;
+    background-image : linear-gradient(to bottom right, #E0FFFF,#AFEEEE);
+    margin : 1rem;
+    padding : 2rem;
+    border-radius: 15px 50px;
+    border : 2px #008b8b solid;
 }
 
 .country_ul{
     list-style: none;
+}
+
+.country_ul li{
+    margin: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.key_span{
+    width : 50px;
+    margin : 1rem;
+    color : #008b8b;
+    font-weight : 900;
 }
 
 .country_ul li p{
@@ -39,5 +40,12 @@
 }
 
 .name_value{
-    font-size : 20px;
+    font-size : 25px;
+    font-weight: 900;
+    color : #2f4f4f;
+}
+
+.flagImg{
+    width : 150px;
+    height: 100px;
 }

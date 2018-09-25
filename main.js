@@ -39,7 +39,7 @@ const displayCountries = countryData => {
             if(key !== "name"){
                 let key_span = document.createElement('span');
                 key_span.setAttribute('class','key_span');
-                key_span.textContent = key;
+                key_span.textContent = key.charAt(0).toUpperCase()+ key.slice(1, key.length);
                 country_li.appendChild(key_span);
             } else {
                 value_p.classList.add("name_value");
@@ -74,4 +74,3 @@ const fetchData = (url) =>{
 }
 
 fetchData(url);
-
