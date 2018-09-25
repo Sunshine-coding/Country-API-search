@@ -72,7 +72,6 @@ const searchCountries = countries => {
   document.querySelector(".filteredResult").innerHTML = "";
 
   let search_input = document.querySelector(".search_input").value.toLowerCase();
-  let filteredResult = document.querySelector(".filteredResult");
     console.log("type", (typeof search_input));
   //let numbers = /[0-9]/g;
   
@@ -81,7 +80,6 @@ const searchCountries = countries => {
   //if (!numbers.test(search_input)) {
     console.log(search_input);
     let filteredCountries;
-    let markupForResult;
 
     filteredCountries = countries.filter(countryObj => {
         if(countryObj["name"].toLowerCase().includes(search_input))
