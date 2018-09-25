@@ -82,8 +82,15 @@ const searchCountries = countries => {
     let filteredCountries;
 
     filteredCountries = countries.filter(countryObj => {
+<<<<<<< HEAD
         if(countryObj["name"].toLowerCase().includes(search_input))
         return countryObj;
+=======
+        return Object.values(countryObj)
+             .join("")
+             .toLowerCase()
+             .includes(search_input);
+>>>>>>> c154b6c... Search by all values
     });
 
     document.querySelector(".search_input").value = "";
