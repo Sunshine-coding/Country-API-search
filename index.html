@@ -15,22 +15,22 @@
 <body>
     <div class="intro_wrapper">
         <p class="title"> <i class="fas fa-globe-asia"></i> World Country List</p>
-        <div class="sort_wrapper">
-            <div>
-                <input type="radio" id="ascending_sort" name="radio" value="ascending_sort" checked />
-                <label for="ascending_sort">Ascending</label>
-            </div>
-            <div>
-                <input type="radio" id="descending_sort" name="radio" value="descending_sort" />
-                <label for="descending_sort">descending</label>
-            </div>
-        </div>
         <p class="filteredResult"></p>
     </div>
 
-    <div class="search_input_wrapper">
-        <input class="search_input" type="text">
-    </div> 
+    <div class="search_sort_wrapper">
+        <input class="search_input" type="text" placeholder="Search ex) name of (country, region, subregion, languages, capital), number of (population), symbol of(currency)">
+        <div class="sort_wrapper">
+            <div>
+                <input type="radio" id="ascending_sort" name="radio" value="ascending_sort" checked/>
+                <label for="ascending_sort" class="labelBg">Ascending</label>
+            </div>
+            <div>
+                <input type="radio" id="descending_sort" name="radio" value="descending_sort"/>
+                <label for="descending_sort" class="labelBg">descending</label>
+            </div>
+        </div>
+    </div>
     <div class="search_Results"></div>
     <script src="main.js"></script>
 </body>
