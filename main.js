@@ -1,8 +1,10 @@
 const url = "https://restcountries.eu/rest/v2/all";
 
-/*name,capital,population,region, subregion,languages,currencies, flag*/
-let search_Results = document.querySelector(".search_Results");
+const search_input = document.querySelector(".search_input");
+const search_Results = document.querySelector(".search_Results");
+let countries_data = null;
 
+// Object type data : name, capital, population, region, subregion, languages, currencies, flag
 function CountryObj(country) {
   this.name = country.name;
   this.region = country.region;
@@ -14,12 +16,16 @@ function CountryObj(country) {
   this.flag = country.flag;
 }
 
+
+// Create array which stores country Objects data
 const extractCountryData = countries => {
   return countries.reduce((acc, country, index) => {
     acc[index] = new CountryObj(country);
     return acc;
   }, []);
 };
+
+
 
 // Sort the country data
 const sortWithAscending = countries => {
@@ -76,9 +82,8 @@ const sortCountries = (countries) => {
 
 // Display the country data
 const displayCountries = () => {
-  
+  //After search, sort is avaliable
   let searchedCountries = searchCountries(countries_data);
-
   let sortedCountries = sortCountries(searchedCountries);
 
   let filteredResult = document.querySelector(".filteredResult"); 
@@ -125,15 +130,13 @@ const displayCountries = () => {
 
 // search by any words
 const searchCountries = countries => {
-    console.log("test", countries);
   document.querySelector(".filteredResult").innerHTML = "";
 
   let search_input = document.querySelector(".search_input").value.toLowerCase();
-    console.log("type", (typeof search_input));
   
   //Clean the result before display new result
   search_Results.innerHTML = "";
-  //if (!numbers.test(search_input)) {
+
     console.log(search_input);
     let filteredCountries;
 
@@ -148,23 +151,24 @@ const searchCountries = countries => {
     return filteredCountries;
 };
 
-const search_input = document.querySelector(".search_input");
-
-let countries_data = null;
-
+//fetch the country JSON data from url
 const fetchData = url => {
   fetch(url)
     .then(response => response.json())
     .then(countries => {
 
       countries_data = extractCountryData(countries);
+
       //As default, it displays every countries in data
-      //displayCountries(extractCountryData(countries));
       displayCountries();
       
     });
 };
 
+fetchData(url);
+
+
+//when ascending & descending sort lable is clicked
 document.querySelector('#ascending_sort').addEventListener("click", ()=>{
   displayCountries();
 });
@@ -177,5 +181,3 @@ document.querySelector('#descending_sort').addEventListener("click", ()=>{
 search_input.addEventListener("keyup", ()=>{
   displayCountries();
 });
-
-fetchData(url);
