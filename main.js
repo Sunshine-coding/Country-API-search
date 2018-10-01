@@ -28,19 +28,23 @@ const extractCountryData = countries => {
 
 
 // Sort the country data
-const sortWithAscending = countries => {
+
+const sortCountriesWithOrder = (countries, ascending) => {
+
+    const order = ascending? 1 : -1;
+    
     //To prevent side effects which means change the original country array
     const newcountries = [...countries];
     const sortedCountries = newcountries.sort((a, b) => {
-
+  
         let nameA = a.name.toUpperCase(); // ignore upper and lowercase
         let nameB = b.name.toUpperCase();
         if(nameA < nameB) {
-            return -1
+            return -1 * order;
         }
         else if (nameA > nameB){
-            return 1;
-            
+            return 1 * order;
+              
         } else if (nameA = nameB){
             return  0;
         }  
@@ -48,34 +52,13 @@ const sortWithAscending = countries => {
     return sortedCountries; 
 }
 
-const sortWithDescending = countries => {
-    //To prevent side effects which means change the original country array
-    const newcountries = [...countries];
-    const sortedCountries = newcountries.sort((a, b) => {
-
-        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        let nameB = b.name.toUpperCase();
-
-        if(nameA < nameB) {
-            return 1
-        }
-        else if (nameA > nameB){
-            return -1;
-
-        } else if (nameA = nameB){
-            return  0;
-        }  
-        
-    });
-    return sortedCountries; 
-}
 
 const sortCountries = (countries) => {
   let sortedCountries;
   if (document.querySelector('#ascending_sort').checked) {
-    sortedCountries = sortWithAscending(countries);
+    sortedCountries = sortCountriesWithOrder(countries, true);
   } else if (document.querySelector('#descending_sort').checked) {
-    sortedCountries = sortWithDescending(countries);
+    sortedCountries = sortCountriesWithOrder(countries, false);
   }
   return sortedCountries;
 };
